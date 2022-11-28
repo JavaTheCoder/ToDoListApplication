@@ -30,24 +30,24 @@ namespace ToDoListApplication.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int todoListId)
         {
-            return View();
+            var todo = new ToDoItem();
+            todo.DueDate = DateTime.Today;
+            todo.ToDoListId = todoListId;
+            return View(todo);
         }
 
         [HttpPost]
         public IActionResult Create(ToDoItem item)
         {
-            item.ToDoListId = 2;
             toDoService.AddToDo(item);
-            
-            return new RedirectResult($"~/ToDoItem/ViewTodos/2");
+            return RedirectToAction("ViewToDos", new { id = item.ToDoListId });
         }
 
         public IActionResult ViewToDos(int id)
         {
-            //var list = toDoService.GetToDoList(id);
-            //return View(list.Items);
+            ViewBag.iD = id;
             return View(_context.ToDoItems.ToList().Where(i => i.ToDoListId == id));
         }
 

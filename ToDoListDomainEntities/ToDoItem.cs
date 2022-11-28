@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 namespace ToDoListDomainEntities
 {
@@ -20,11 +21,18 @@ namespace ToDoListDomainEntities
         [Required]
         public DateTime DueDate { get; set; }
 
+        // TODO: Make status enum
         public string Status { get; set; } = "Not Started";
 
-        //// Navigation Properties
+        // Navigation Properties
         public int ToDoListId { get; set; }
 
         public ToDoList ToDoList { get; set; }
+
+        // ToString Method
+        public override string ToString()
+        {
+            return $"{Id}.{Title} - {Description}. Created on {CreationDate}. Due to {DueDate}. Status - {Status}";
+        }
     }
 }
