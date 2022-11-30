@@ -33,8 +33,9 @@ namespace ToDoListApplication.Controllers
         public IActionResult Create(int todoListId)
         {
             var todo = new ToDoItem();
-            todo.DueDate = DateTime.Today;
             todo.ToDoListId = todoListId;
+            todo.CreationDate = DateTime.Today;
+            todo.DueDate = DateTime.Today.AddHours(23).AddMinutes(59);
             return View(todo);
         }
 

@@ -17,11 +17,6 @@ namespace ToDoListApplication.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult HomeView()
         {
             var lists = _context.ToDoLists.ToList();

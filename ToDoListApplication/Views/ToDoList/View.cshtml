@@ -4,32 +4,49 @@
     ViewData["Title"] = "View";
 }
 
-<h1>View</h1>
+<body>
+    <section class="vh-100 gradient-custom-2">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-12 col-xl-10">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-controller="ToDoItem" asp-action="ViewToDos" asp-route-id="@item.Id">View</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    <div class="card mask-custom">
+                        <div class="card-body p-4 text-white">
+                            <div class="text-center pt-3 pb-2">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                                     alt="Check" width="60">
+                                <h2 class="my-3">ToDoList</h2>
+                                <button class="add-new btn"><a asp-action="Create">Add New</a></button>
+                            </div>
+
+                            <table class="table text-white mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="trelement">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                <a asp-action="ViewToDos" asp-controller="ToDoItem" asp-route-id="@item.Id" class="text-class">View</a> |
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="text-class">Edit</a> |
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="text-class">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

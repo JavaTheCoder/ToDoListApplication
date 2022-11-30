@@ -3,30 +3,6 @@ using ToDoListApplication.Models;
 using ToDoListApplication.Service;
 using ToDoListDomainEntities;
 
-/*
-using (ApplicationDBContext context = new ApplicationDBContext())
-{
-    var list = new ToDoList
-    {
-        Name = "Test List"
-    };
-
-    var todo = new ToDoItem
-    {
-        Title = "Finish this Project",
-        CreationDate = DateTime.Now,
-        DueDate = DateTime.Parse("11/30/2022"),
-        Description = "No Description",
-        Status = "In Progress",
-    };
-
-    list.Items.Add(todo);
-    context.ToDoLists.Add(list);
-    context.ToDoItems.Add(todo);
-    context.SaveChanges();
-}
-*/
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -56,6 +32,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=ToDoList}/{action=Index}/{id?}");
+    pattern: "{controller=ToDoList}/{action=HomeView}/{id?}");
 
 app.Run();

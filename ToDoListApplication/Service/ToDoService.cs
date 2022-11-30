@@ -17,6 +17,7 @@ namespace ToDoListApplication.Service
 
         public ToDoItem AddToDo(ToDoItem item)
         {
+            item.CreationDate = DateTime.Now;
             _context.ToDoItems.Add(item);
             _context.SaveChanges();
             return item;

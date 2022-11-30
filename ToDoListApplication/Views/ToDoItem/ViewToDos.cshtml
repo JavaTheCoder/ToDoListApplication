@@ -4,200 +4,64 @@
 @{
     ViewData["Title"] = "View";
 }
-<body @*class="gradient-custom-2"*@>
-    <section class="vh-100 gradient-custom-2">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-12 col-xl-10">
 
-                    <div class="card mask-custom">
-                        <div class="card-body p-4 text-white">
+<section class="vh-100 gradient-custom-2">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-12 col-xl-10">
 
-                            <div class="text-center pt-3 pb-2">
+                <div class="card mask-custom">
+                    <div class="card-body p-4 text-white">
+                        <div class="text-center pt-3 pb-2">
+                            <a href="/">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
-                                     alt="Check" width="60">
-                                <h2 class="my-4">ToDoList</h2>
-                            </div>
-
-                            <table class="table text-white mb-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Due Date</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr class="trelement">
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Title)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.DueDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Status)
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.Id" class="text-class">Edit</a> |
-                                                <a asp-action="Details" asp-route-id="@item.Id" class="text-class">Details</a> |
-                                                <a asp-action="Delete" asp-route-id="@item.Id" class="text-class">Delete</a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                            <h5 class="text-center pt-3 pb-2">
-                                @Html.ActionLink("Add", "Create", "ToDoItem", new { todoListId = ViewBag.iD }, null)
-                            </h5>
+                                alt="Check" width="60">
+                            </a>
+                            <h2 class="my-3">ToDoList</h2>
+                            <button class="add-new btn">@Html.ActionLink("Add New", "Create", "ToDoItem", new { todoListId = ViewBag.iD }, null)</button>
+                            <button id="btn" class="hide-comp btn" onclick="handleClick('@JsonConvert.SerializeObject(Model)')">Hide Completed</button>
+                            <button id="button" class="show-due-today btn" onclick="handleClickDueToday('@JsonConvert.SerializeObject(Model)')">Due Today</button>
                         </div>
-                    </div>
 
+                        <table class="table text-white mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Due Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="trelement">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DueDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="text-class">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="text-class">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="text-class">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
             </div>
         </div>
-    </section>
-</body>
-
-<style>
-.gradient-custom-2 {
-  /* fallback for old browsers */
-  background: #7e40f6;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(
-    to right,
-    rgba(126, 64, 246, 1),
-    rgba(80, 139, 252, 1)
-  );
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(
-    to right,
-    rgba(126, 64, 246, 1),
-    rgba(80, 139, 252, 1)
-  );
-}
-
-.mask-custom {
-  background: rgba(24, 24, 16, 0.2);
-  border-radius: 2em;
-  backdrop-filter: blur(25px);
-  border: 2px solid rgba(255, 255, 255, 0.05);
-  background-clip: padding-box;
-  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
-}
-
-a:link,
-a:visited,
-a:active {
-    text-decoration: none;
-    color: floralwhite;
-}
-
-a:hover {
-    color: deepskyblue;
-}
-
-</style>
-
-@*
-<h1>View ToDos</h1>
-
-@Html.ActionLink("Create New", "Create", "ToDoItem", new { todoListId = ViewBag.iD }, null)
-<button id='btn' onclick="handleClick('@JsonConvert.SerializeObject(Model.ToList())')">Hide Completed</button>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DueDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="trelement">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreationDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DueDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<style>
-    #create {
-        margin-right: 800px;
-    }
-</style>
-
-<script>
-    let arrOfClicked = [];
-    let isClicked = false;
-    const btn = document.getElementById('btn');
-    const trelement = document.getElementsByClassName('trelement');
-
-    function handleClick(val) {
-        isClicked = !isClicked;
-
-        if (isClicked) {
-            btn.textContent = "Show Completed";
-
-            let data = JSON.parse(val);
-            for (let j = 0; j < trelement.length; j++) {
-                for(let i of data) {
-                    if (i.Status == "Completed") {
-                        trelement[j].style = "display:none";
-                        arrOfClicked.push(j);
-                    }
-                }
-            }
-        } else {
-            btn.textContent = "Hide Completed";
-            arrOfClicked.forEach(el => {
-                trelement[el].style = "";
-            })
-            arrOfClicked = [];
-        }
-    }
-</script>
-*@
+    </div>
+</section>

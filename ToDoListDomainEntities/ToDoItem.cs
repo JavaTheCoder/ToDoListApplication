@@ -16,12 +16,11 @@ namespace ToDoListDomainEntities
         [Required]
         public string Description { get; set; }
 
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; }
 
         [Required]
         public DateTime DueDate { get; set; }
 
-        // TODO: Make status enum
         public string Status { get; set; } = "Not Started";
 
         // Navigation Properties
