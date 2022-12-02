@@ -20,7 +20,7 @@
 * ### ➕Creating ToDos with Title, Description, Due Date & Status
 
 ***
-## How to Install?🤔
+## How to Run?🤔
 * ### Clone the Project
 * ### Open "Package Manager Console" on Visual Studio
 * ### Add Migration with command "Add-Migration 'migration-name'"
